@@ -4,9 +4,9 @@ Primer error:
       
       PHP Error Message
       
-      "Error: Allowed memory size of 67108864 bytes exhausted( tried to allocate 72 bytes) in /includes/menu.inc on line        3742"
+      "Error: Allowed memory size of 67108864 bytes exhausted( tried to allocate 72 bytes) in /includes/menu.inc on line 3742"
       
-      Causa: Drupal tiene un límite de memoria php muy bajo por lo que a poco que uses algún módulo se llega a                    este límite.
+      Causa: Drupal tiene un límite de memoria php muy bajo por lo que a poco que uses algún módulo se llega a este límite.
       
       Solución: incrementar este límite de la siguiente manera:
                 -Crear un archivo php.ini en el directorio raiz del servidor poniendo: php_value memory_limit= "512M"
@@ -15,7 +15,8 @@ Primer error:
                         php_value post_max_size 200M
                         php_value memory_limit 80M
                         
-                Inicialmente fueron estos valores, pero al seguir instalando módulos ha dado problemas otra vez y tuvimos que incrementar los valores a lo siguiente: 
+                Inicialmente fueron estos valores, pero al seguir instalando módulos ha dado problemas otra vez y tuvimos que incrementar 
+				los valores a lo siguiente: 
                          php_value upload_max_filesize 512M
                          php_value post_max_size 512M
                          php_value memory_limit 512M
@@ -23,8 +24,23 @@ Primer error:
            
 Segundo error:
 
-    ->  Instalando el módulo Dev de Drupal se produjo lo siguiente: Durante la instalación del módulo, la página de la          web se quedó en blanco, se volvío para atrás y salieron errores de traducción y la página dejó de funcionar             debido a esto. No salía ningún tipo de error y no cargaba absolutamente nada de la página, salía todo en blanco.
+    ->  Instalando el módulo Dev de Drupal se produjo lo siguiente: Durante la instalación del módulo, la página de la web se quedó en blanco, 
+		se volvío para atrás y salieron errores de traducción y la página dejó de funcionar debido a esto. No salía ningún tipo de error y no 
+		cargaba absolutamente nada de la página, salía todo en blanco.
     
-        -Solución:  Buscando información vimos que decían de borrar la tabla de ese módulo desde phpMyAdmin,pero aquí no                     salía ninguna tabla generada por ese módulo por lo que eso no nos servía,vimos también la opción de                     borrar el módulo desde el FTP del servidor y efectivamente, accediendo a /sites/all/modules allí                        estaba por lo que lo seleccionamos y lo borramos directamente,salía un mensaje de confirmación de si                     lo queriamos borrar y le dimos a aceptar. Después de hacer esto, actualizamos nuestra página web y                      por fin la recuperamos.
+        Solución:  Buscando información vimos que decían de borrar la tabla de ese módulo desde phpMyAdmin, pero aquí no salía ninguna tabla 
+		generada por ese módulo por lo que eso no nos servía,vimos también la opción de borrar el módulo desde el FTP del servidor y efectivamente, 
+		accediendo a /sites/all/modules allí estaba por lo que lo seleccionamos y lo borramos directamente,salía un mensaje de confirmación de si 
+		lo queriamos borrar y le dimos a aceptar. Después de hacer esto, actualizamos nuestra página web y por fin la recuperamos.
+		
+		
+Tercer error:
+
+	->  Instalando un módulo, se produjo el siguiente error:
+	
+	"Parse Error: syntax error, unexpected T_PAAMAYIM_NEKUDOTAYIM in /home/a13888858/public_html/sites/all/modules/versioncontrol/includes/VersioncontrolRepository.php on line 214"
+	"Parse Error: syntax error, unexpected T_PAAMAYIM_NEKUDOTAYIM in /home/a13888858/public_html/sites/all/modules/versioncontrol/includes/VersioncontrolRepository.php on line 280"
     
+	Solución: Ir al archivo indicado y, en las líneas que dan error, cambiar :: por -> como forma para llamar a un método.
+			  ($log->errors = $sync::SYNC_ERROR_LOCKED; --->  $log->errors = $sync->SYNC_ERROR_LOCKED;)
                      
