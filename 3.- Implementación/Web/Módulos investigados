@@ -1,0 +1,17 @@
+Este documento refleja módulos que hemos investigado y que nos pueden resolver partes de funcionalidad que 
+fallan,faltan o que hay que mejorar.
+
+->Breadcrumbs:
+    Nos solucionaría el problema que tenemos que al pulsar un enlace en una página, se pierde la pestaña del menú
+    horizontal que estaba pulsada. Esto lo usamos para evitar el problema de estar en un contenido y no saber en que
+    menú de la página estamos situados.
+    
+->Rules:
+    Este módulo lo usariamos para que  cuando un usuario se registre, se le avise en ese mismo momento mediante un mensaje
+    que se le ha enviado un correo de bienvenida. Esto nos soluciona que el usuario se mantenga informado sobre el mensaje
+    de correo que se le ha enviado, sin esto, se manda el correo igualmente pero el usuario no se ha enterado de que se
+    le ha enviado.
+    
+->Views:
+    Crear un tipo de contenido que sea receta, con los campos que queramos que tenga nuestra receta, y de esta manera,
+    rellenar nuestro recetario. Tenemos que estudiar aún si sirve esto para la lista de la compra y la despensa.
