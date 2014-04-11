@@ -1,4 +1,4 @@
-Primer error:
+﻿Primer error:
   
     -> Instalando un módulo, se produjo el siguiente error:
       
@@ -43,4 +43,10 @@ Tercer error:
     
 	Solución: Ir al archivo indicado y, en las líneas que dan error, cambiar :: por -> como forma para llamar a un método.
 			  ($log->errors = $sync::SYNC_ERROR_LOCKED; --->  $log->errors = $sync->SYNC_ERROR_LOCKED;)
+
+Cuarto error:
+
+	-> Después de desactivar y desinstalar un módulo, éste sigue apareciendo en la sección de módulos.
+
+	Solución: Borrar la carpeta del módulo correspondiente directamente del servidor (/mi_sitio/sites/all/modules)
                      
