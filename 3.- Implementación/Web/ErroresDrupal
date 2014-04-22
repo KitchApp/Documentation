@@ -49,4 +49,26 @@ Cuarto error:
 	-> Después de desactivar y desinstalar un módulo, éste sigue apareciendo en la sección de módulos.
 
 	Solución: Borrar la carpeta del módulo correspondiente directamente del servidor (/mi_sitio/sites/all/modules)
-                     
+
+Quinto error:
+
+	-> Al registrar satisfactoriamente un nuevo usuario en la página, se redirige a la página de inicio pero no aparece el siguiente mensaje: 
+	   "Un mensaje de bienvenida con instrucciones adicionales se ha enviado a su dirección de correo electrónico."
+
+	Este mensaje es generado en la función user_register_submit($form, &$form_state), dentro de la ruta /mi_sitio/modules/user/user.module,
+	donde aparece algo del estilo a:
+
+	if ($admin && !$notify) { ... }
+	else {
+      	    drupal_set_message(t('A welcome message with further instructions has been sent to your e-mail address.'));
+	    $form_state['redirect'] = '';
+  	}
+
+	Solición: Las sesiones de Drupal están unidos por un número de identificación al usuario . 
+		  Drupal también tiene sus propias funciones para tratar las sesión, y una de ellas es una comprobación para ver si la sesión actual 
+		  está asociada a una cuenta de usuario válido (para los usuarios anónimos es el usuario 0).
+		  Si Drupal no encuentra un usuario válido para la sesión actual, la sesión se regenera de nuevo, es decir, la información anterior se pierde.
+
+		  La solución consiste en introducir manualmente el usuario anónimo con uid = 0 en la base de datos ya que, seguramente, no esté:
+		  INSERT INTO `users` (`uid`, `name`, `pass`, `mail`, `mode`, `sort`, `threshold`, `theme`, `signature`, `signature_format`, `created`, `access`, `login`, `status`, `timezone`, `language`, `picture`, `init`, `data`) 
+		  VALUES (0, '', '', '', 0, 0, 0, '', '', 0, 0, 0, 0, 0, NULL, '', '', '', NULL);
